@@ -1,13 +1,15 @@
-import { Box, Container, Grid2 } from "@mui/material";
+import {  Container, Grid2 } from "@mui/material";
 import db from "./db.json";
 import { useEffect, useState } from "react";
 import { Item } from "./types";
+import ItemCard from "./components/ItemCard/ItemCard";
 
 function App() {
   const [state, setState] = useState<Item[]>([]);
 
   useEffect(() => {
-    const newItems = shuffle(db);
+    const newArray = [...db, ...db];
+    const newItems = shuffle(newArray);
     setState(newItems);
   }, []);
 
@@ -24,17 +26,10 @@ function App() {
   };
 
   return (
-    <Container maxWidth={"lg"}>
+    <Container maxWidth={"md"}>
       <Grid2 container spacing={2}>
-        {state.map((item) => (
-          <Grid2 size={3} key={item.id}>
-            <Box
-              component={"img"}
-              src={item.img}
-              alt={item.name}
-              sx={{ width: "100%", heigth: "auto" }}
-            />
-          </Grid2>
+        {state.map((item, index) => (
+          <ItemCard item={item} key={index} />
         ))}
       </Grid2>
     </Container>
