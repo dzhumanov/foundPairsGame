@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Item } from "./types";
 import ItemCard from "./components/ItemCard/ItemCard";
 import { newGame } from "./helpers/newGame/newGame";
+import Confetti from "react-confetti";
 
 function App() {
   const [state, setState] = useState<Item[]>([]);
@@ -10,6 +11,7 @@ function App() {
   const [foundMatches, setFoundMatches] = useState<Item[]>([]);
   const [won, setWon] = useState<boolean>(false);
   const [tries, setTries] = useState<number>(0);
+  const [party, setParty] = useState<boolean>(false);
 
   useEffect(() => {
     newGame(setState, setActiveCards, setFoundMatches, setWon, setTries);
@@ -29,6 +31,7 @@ function App() {
 
         if (newFoundMatches.length === state.length / 2) {
           setWon(true);
+          setParty(true);
         }
       } else {
         setTimeout(() => setActiveCards([]), 1000);
@@ -51,6 +54,15 @@ function App() {
       </Grid2>
       {won && (
         <>
+          <Confetti
+            run={party}
+            style={{ pointerEvents: "none" }}
+            numberOfPieces={party ? 1000 : 0}
+            recycle={false}
+            onConfettiComplete={() => {
+              setParty(false);
+            }}
+          />
           <Typography variant="h2" sx={{ textAlign: "center", color: "green" }}>
             You won!
           </Typography>
