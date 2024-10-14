@@ -1,6 +1,22 @@
 [
-  { "id": 1, "name": "Burger", "img": "src/assets/images/burger.avif" },
-  { "id": 2, "name": "Pizza", "img": "src/assets/images/pizza.avif" },
-  { "id": 3, "name": "Pasta", "img": "src/assets/images/pasta.webp" },
-  { "id": 4, "name": "Salad", "img": "src/assets/images/salad.avif" }
+  {
+    "id": 1,
+    "name": "Burger",
+    "img": "src/assets/images/burger.avif"
+  },
+  {
+    "id": 2,
+    "name": "Pizza",
+    "img": "src/assets/images/pizza.avif"
+  },
+  {
+    "id": 3,
+    "name": "Pasta",
+    "img": "src/assets/images/pasta.webp"
+  },
+  {
+    "id": 4,
+    "name": "Salad",
+    "img": "src/assets/images/salad.avif"
+  }
 ]

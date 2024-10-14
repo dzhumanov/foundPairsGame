@@ -1,21 +1,22 @@
 import { Box, Grid2 } from "@mui/material";
 import { Item } from "../../types";
-import { useState } from "react";
 
 interface Props {
   item: Item;
+  activeCard: boolean;
+  onClick: () => void;
+  guessed: boolean;
 }
 
-const ItemCard: React.FC<Props> = ({ item }) => {
-  const [isFlip, setIsFlip] = useState<boolean>(false);
-
-  const flipCard = () => {
-    setIsFlip(!isFlip);
-  };
-
+const ItemCard: React.FC<Props> = ({ item, activeCard, onClick, guessed }) => {
   return (
-    <Grid2 size={3} className="scene">
-      <Box onClick={flipCard} className={`item ${isFlip ? "is-flipped" : ""}`}>
+    <Grid2 size={3} className={`scene`}>
+      <Box
+        onClick={!guessed ? onClick : undefined}
+        sx={{ width: "100%", height: "100%" }}
+        className={`item ${activeCard || guessed ? "is-flipped" : ""} 
+        `}
+      >
         <Box
           sx={{
             width: "100%",
@@ -33,6 +34,7 @@ const ItemCard: React.FC<Props> = ({ item }) => {
             width: "100%",
             height: "100%",
             borderRadius: "30px",
+            backgroundColor: "#1E1E1E",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -43,7 +45,7 @@ const ItemCard: React.FC<Props> = ({ item }) => {
             component={"img"}
             src={item.img}
             alt={item.name}
-            sx={{ width: "100%", heigth: "auto" }}
+            sx={{ width: "100%", height: "auto" }}
           />
         </Box>
       </Box>
