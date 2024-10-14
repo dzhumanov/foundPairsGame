@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Box, Container, Grid2 } from "@mui/material";
+import db from "./db.json";
+import { useEffect, useState } from "react";
+import { Item } from "./types";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [state, setState] = useState<Item[]>([]);
+
+  useEffect(() => {
+    const newItems = shuffle(db);
+    setState(newItems);
+  }, []);
+
+  const shuffle = (array: Item[]) => {
+    let temp;
+    let randomNumber;
+    for (let i = array.length - 1; i > 0; i--) {
+      randomNumber = Math.floor(Math.random() * (i + 1));
+      temp = array[randomNumber];
+      array[randomNumber] = array[i];
+      array[i] = temp;
+    }
+    return array;
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Container maxWidth={"lg"}>
+      <Grid2 container spacing={2}>
+        {state.map((item) => (
+          <Grid2 size={3} key={item.id}>
+            <Box
+              component={"img"}
+              src={item.img}
+              alt={item.name}
+              sx={{ width: "100%", heigth: "auto" }}
+            />
+          </Grid2>
+        ))}
+      </Grid2>
+    </Container>
+  );
 }
 
-export default App
+export default App;
