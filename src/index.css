@@ -2,11 +2,6 @@ body {
   background-color: #1E1E1E;
 }
 
-.scene {
-  width: 250px;
-  height: 250px;
-  perspective: 600px;
-}
 
 .item {
   width: 100%;

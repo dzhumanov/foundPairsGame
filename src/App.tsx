@@ -1,9 +1,8 @@
-import { Box, Container, Grid2, Typography } from "@mui/material";
-import db from "./db.json";
+import { Box, Button, Container, Grid2, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Item } from "./types";
 import ItemCard from "./components/ItemCard/ItemCard";
-import { shuffle } from "./helpers/ShuffleArray/shuffle";
+import { newGame } from "./helpers/newGame/newGame";
 
 function App() {
   const [state, setState] = useState<Item[]>([]);
@@ -13,14 +12,8 @@ function App() {
   const [tries, setTries] = useState<number>(0);
 
   useEffect(() => {
-    const newArray = [...db, ...db];
-    const newItems = shuffle(newArray);
-    setState(newItems);
+    newGame(setState, setActiveCards, setFoundMatches, setWon, setTries);
   }, []);
-
-  useEffect(() => {
-    console.log(foundMatches);
-  }, [foundMatches]);
 
   const flipCard = (item: Item, index: number) => {
     if (activeCards.length === 0) {
@@ -44,7 +37,7 @@ function App() {
   };
 
   return (
-    <Container maxWidth={"md"}>
+    <Container sx={{ width: "750px" }}>
       <Grid2 container spacing={2}>
         {state.map((item, index) => (
           <ItemCard
@@ -57,9 +50,27 @@ function App() {
         ))}
       </Grid2>
       {won && (
-        <Typography variant="h2" sx={{ textAlign: "center", color: "green" }}>
-          You won!
-        </Typography>
+        <>
+          <Typography variant="h2" sx={{ textAlign: "center", color: "green" }}>
+            You won!
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={() =>
+              newGame(
+                setState,
+                setActiveCards,
+                setFoundMatches,
+                setWon,
+                setTries
+              )
+            }
+            sx={{ my: 2, textAlign: "center", display: "block", mx: "auto" }}
+            color="success"
+          >
+            New game
+          </Button>
+        </>
       )}
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h2" sx={{ textAlign: "center", color: "white" }}>

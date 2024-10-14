@@ -10,7 +10,7 @@ interface Props {
 
 const ItemCard: React.FC<Props> = ({ item, activeCard, onClick, guessed }) => {
   return (
-    <Grid2 size={3} className={`scene`}>
+    <Grid2 size={3} className={`scene`} sx={{height: "calc(750px / 4)"}}>
       <Box
         onClick={!guessed ? onClick : undefined}
         sx={{ width: "100%", height: "100%" }}
@@ -45,7 +45,7 @@ const ItemCard: React.FC<Props> = ({ item, activeCard, onClick, guessed }) => {
             component={"img"}
             src={item.img}
             alt={item.name}
-            sx={{ width: "100%", height: "auto" }}
+            sx={{ maxWidth: "100%" }}
           />
         </Box>
       </Box>

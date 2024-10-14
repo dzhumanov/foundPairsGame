@@ -18,5 +18,25 @@
     "id": 4,
     "name": "Salad",
     "img": "src/assets/images/salad.avif"
+  },
+  {
+    "id": 5,
+    "name": "Soda",
+    "img": "src/assets/images/soda.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Ice cream",
+    "img": "src/assets/images/icecream.jpeg"
+  },
+  {
+    "id": 7,
+    "name": "Fries",
+    "img": "src/assets/images/fries.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Burrito",
+    "img": "src/assets/images/burrito.jpg"
   }
 ]
